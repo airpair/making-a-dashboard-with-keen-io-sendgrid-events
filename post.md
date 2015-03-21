@@ -22,9 +22,9 @@ It should be pretty straightforward. The SendGrid free account will let you send
 
 ## Connecting both services 
 
-Next up, let's setup SendGrid's Event Webhook to start sending all the events that happen to our emails to Keen IO:
+Next up, let's setup SendGrid's Event Webhook to start sending all of our email events to Keen IO.
 
-- When you create an account at Keen IO, it already gives you a "My First Project" application. Copy the "Project ID" information, then click on "Show API Keys" and copy both the "Write Key" and the "Read Key".
+- When you create an account at Keen IO, it automatically sets up a "My First Project" application. Copy the "Project ID" information, then click on "Show API Keys" and copy both the "Write Key" and the "Read Key".
 
 ![keen-overview](https://d262ilb51hltx0.cloudfront.net/max/800/1*exRUf3oObXRBXKlE4psjcw.png)
 
@@ -32,7 +32,7 @@ Next up, let's setup SendGrid's Event Webhook to start sending all the events th
 
 ![sendgrid dashboard](https://d262ilb51hltx0.cloudfront.net/max/800/1*RG5ixWZhndpGG3izwBSQfg.png)
 
-- In the same "Show Disabled Apps" page, enable the app "Event Notification". Scroll up, click on "Show Enabled Apps", hover over the "Event Notification" app you just enabled and click on the "Settings" options for it. In the field HTTP Post URL, you need to set the Keen IO URL to save all of your events. Use the URL below but change the variables KEEN_PROJECT_ID and API_WRITE_KEY with the information you copied earlier from Keen IO:
+- In the same "Show Disabled Apps" page, enable the app "Event Notification". Scroll up, click on "Show Enabled Apps", hover over the "Event Notification" app you just enabled and click on the "Settings" options for it. To save all of you revents, you need to set the HTTP Post URL field to the Keen IO URL. Use the URL below, but change the variables KEEN_PROJECT_ID and API_WRITE_KEY with the information you copied earlier from Keen IO:
 
 ```sh
 https://api.keen.io/3.0/projects/KEEN_PROJECT_ID/partners/sendgrid/versions/v3?api_key=API_WRITE_KEY
@@ -43,14 +43,14 @@ https://api.keen.io/3.0/projects/KEEN_PROJECT_ID/partners/sendgrid/versions/v3?a
 
 (If you need more help on this step, ping me or check out this link: https://keen.io/docs/partners/#sendgrid)
 
-Awesome! With this setup, now we just have to send out an email with SendGrid so we can see that information inside Keen IO. Let's try it out by sending a test email using our terminal and cURL. Like with the URL above, just change the variables YOUR_EMAIL, YOUR_SENDGRID_USERNAME and YOUR_SENDGRID_PASSWORD:
+Awesome! With this setup, now we just have to send an email with SendGrid so we can see that information inside Keen IO. Let's try it out by sending a test email using our terminal and cURL. Like with the URL above, just change the variables YOUR_EMAIL, YOUR_SENDGRID_USERNAME and YOUR_SENDGRID_PASSWORD:
 
 ```sh
 $ curl -d 'to=YOUR_EMAIL&amp;toname=YouAreAwesome&amp;subject=Awesome Subject&amp;text=awesomebody&amp;from=info@domain.com&amp;api_user=YOUR_SENDGRID_USERNAME&amp;api_key=YOUR_SENDGRID_PASSWORD' https://api.sendgrid.com/api/mail.send.json
 ```
 [Gist](https://gist.github.com/heitortsergent/81b18035f0d955f2fff9#file-sendgrid-email-send)
 
-If we go back to our Keen IO project dashboard, in Overview we can check the "Event Explorer", select the "Sendgrid Email Events" from the drop-down list and then click on the Last 10 Events button. This should show at least one event of our delivered email or more if you went to your inbox and opened it. ☺
+If we go back to our Keen IO project dashboard, in Overview we can check the "Event Explorer", select the "Sendgrid Email Events" from the drop-down list and then click on the Last 10 Events button. This should show at least one of our delivered email events, or more if you went to your inbox and opened it. ☺
 
 ## Grab the dashboard templates 
 
@@ -66,7 +66,7 @@ The hero-thirds template folder only has two files, index.html and preview.png. 
 
 ## Creating and displaying email metrics 
 
-At the bottom of index.html, you will see some script tags. We'll add our own script right at the bottom, but before the closing body tag. The first thing we have to do is initialize a Keen object instance of their JavaScript library by doing:
+At the bottom of index.html, you will see some script tags. We'll add our own script right at the bottom of the page, but before the closing body tag. The first thing we have to do is initialize a Keen object instance of their JavaScript library by doing:
 
 ```html
 // index.html
@@ -128,7 +128,7 @@ Let's first put up a bar chart in our dashboard showing all the events as separa
 ```
 [Gist](https://gist.github.com/heitortsergent/81b18035f0d955f2fff9#file-index-2-html)
 
-All our queries and draw calls will be inside the Keen.ready function callback. For each query we want to make, we create a variable ("daily_send_static" in this case) and then we call client.draw with the same variable as the first parameter (the query that will be executed), and next define which html element in our page will hold the chart. In this case, we're using the element ID "daily-send-30-days", so let's scroll up our index.html file and set that ID for the first element:
+All our queries and draw calls will be inside the Keen.ready function callback. For each query we want to make, we create a variable ("daily_send_static" in this case) and then we call client.draw with the same variable as the first parameter (the query that will be executed). Next define which html element in our page will hold the chart. In this case, we're using the element ID "daily-send-30-days", so let's scroll up our index.html file and set that ID for the first element:
 
 ```html
 <div class=”container-fluid”>
@@ -149,13 +149,13 @@ All our queries and draw calls will be inside the Keen.ready function callback. 
 ```
 [Gist](https://gist.github.com/heitortsergent/81b18035f0d955f2fff9#file-index-3-html)
 
-We change the title of our chart from "Cell Title" to "Last 30 Days Events", remove the <img data-src=”holder.js/100%x240/white/text:#grid-1–1"> placeholder, and add the id "daily-send-30-days" to our div so Keen knows where to draw our column chart.
+We change the title of our chart from "Cell Title" to "Last 30 Days Events", remove the `<img data-src=”holder.js/100%x240/white/text:#grid-1–1">` placeholder, and add the id `"daily-send-30-days"` to our div so Keen knows where to draw our column chart.
 
 Now just open index.html in your browser and you should be able to see this:
 
 ![dashboard-1](https://d262ilb51hltx0.cloudfront.net/max/800/1*omGv7-pYf6faHnDdXQXX5w.png)
 
-Awesome! Okay, it's not super impressive, but as we get more data sent from SendGrid in the next days, our chart will look even better. ☺
+Awesome! Okay, it's not super impressive, but as we get more data sent from SendGrid over the next days, our chart will look even better. ☺
 
 Let's set up something a little bit more complicated: an email delivery funnel. We will be able to check a chart showing how many people received the email, opened, read and finally clicked on any link inside. Just like the first query, let's scroll down to the bottom and add some code inside the Keen.ready block (this is a big chunk):
 
@@ -258,7 +258,7 @@ Just change our chart title to "Email Delivery Funnel", remove the image placeho
 
 If the image above looks a little bit different than yours, try going to your inbox and opening the test email we sent at the beginning of this tutorial and then refreshing the page.
 
-Next up, let's add more information to our dashboard. I'm going to paste the code to make a Keen query that will count the number of emails sent all-time (starting when we integrated with Keen IO), number of spam reports for the last 30 days, and a pie chart comparing the number of emails delivered to the number of emails opened:
+Next up, let's add more information to our dashboard. I'm going to paste the code to make a Keen query that will count the number of emails sent all-time (starting when we integrated with Keen IO), the number of spam reports for the last 30 days, and a pie chart comparing the number of emails delivered to the number of emails opened:
 
 ```html
 // query and draw a metric (a number + text)
@@ -365,6 +365,6 @@ Now you should already know what to do next to get this new data in our dashboar
 
 ## Next steps
 
-This is an easy and quick way to get setup with your own custom dashboard for your email events. Each company will probably want to have its own custom set of metrics, and you can do a lot more by checking Keen's documentation, the data analysis API and the data visualization API. You can also add more information to your emails events using SendGrid's X-SMTPAPI. For example, you can add a category to all your events regarding purchases, and use that data to make more in-depth analysis inside Keen IO.
+This is an quick & easy way to get setup with your own custom dashboard for email events. Each company will probably want to have its own custom set of metrics, and you can do a lot more by checking Keen's documentation, the data analysis API and the data visualization API. You can also add more information to your emails events using SendGrid's X-SMTPAPI. For example, you can add a category to all your events regarding purchases, and use that data to make more in-depth analysis inside Keen IO.
 
 Now go ahead and put that dashboard in your office 60'' screen for everyone to see! ☺
