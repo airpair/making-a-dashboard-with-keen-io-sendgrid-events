@@ -11,7 +11,7 @@ The final result should look similar to this:
 
 ![final result](https://d262ilb51hltx0.cloudfront.net/max/800/1*Kzn34zgl1hirGgJELZOaTQ.png)
 
-# Setup 
+## Setup 
 
 First things first, let's create a free account at:
 
@@ -20,7 +20,7 @@ First things first, let's create a free account at:
 
 It should be pretty straightforward. The SendGrid free account will let you send up to 12.000 emails a month, and Keen IO will let you store 50.000 events a month.
 
-# Connecting both services 
+## Connecting both services 
 
 Next up, let's setup SendGrid's Event Webhook to start sending all the events that happen to our emails to Keen IO:
 
@@ -52,7 +52,7 @@ $ curl -d 'to=YOUR_EMAIL&amp;toname=YouAreAwesome&amp;subject=Awesome Subject&am
 
 If we go back to our Keen IO project dashboard, in Overview we can check the "Event Explorer", select the "Sendgrid Email Events" from the drop-down list and then click on the Last 10 Events button. This should show at least one event of our delivered email or more if you went to your inbox and opened it. ☺
 
-# Grab the dashboard templates 
+## Grab the dashboard templates 
 
 Okay, so with that, let's get our dashboard setup! Keen IO has a pretty cool repository on GitHub with a set of responsive (Bootstrap) dashboards we can use. Let's grab it and go to the hero-thirds template layout:
 
@@ -64,7 +64,7 @@ $ cd dashboards/layouts/hero-thirds
 
 The hero-thirds template folder only has two files, index.html and preview.png. Open index.html in your favorite text editor and scroll down to the bottom.
 
-# Creating and displaying email metrics 
+## Creating and displaying email metrics 
 
 At the bottom of index.html, you will see some script tags. We'll add our own script right at the bottom, but before the closing body tag. The first thing we have to do is initialize a Keen object instance of their JavaScript library by doing:
 
@@ -363,7 +363,7 @@ Now you should already know what to do next to get this new data in our dashboar
 
 ![dashboard-3](https://d262ilb51hltx0.cloudfront.net/max/800/1*Kzn34zgl1hirGgJELZOaTQ.png)
 
-# Next steps 
+## Next steps
 
 This is an easy and quick way to get setup with your own custom dashboard for your email events. Each company will probably want to have its own custom set of metrics, and you can do a lot more by checking Keen's documentation, the data analysis API and the data visualization API. You can also add more information to your emails events using SendGrid's X-SMTPAPI. For example, you can add a category to all your events regarding purchases, and use that data to make more in-depth analysis inside Keen IO.
 
