@@ -32,7 +32,7 @@ Next up, let's setup SendGrid's Event Webhook to start sending all of our email 
 
 ![sendgrid dashboard](https://d262ilb51hltx0.cloudfront.net/max/800/1*RG5ixWZhndpGG3izwBSQfg.png)
 
-- In the same "Show Disabled Apps" page, enable the app "Event Notification". Scroll up, click on "Show Enabled Apps", hover over the "Event Notification" app you just enabled and click on the "Settings" options for it. To save all of you revents, you need to set the HTTP Post URL field to the Keen IO URL. Use the URL below, but change the variables KEEN_PROJECT_ID and API_WRITE_KEY with the information you copied earlier from Keen IO:
+- In the same "Show Disabled Apps" page, enable the app "Event Notification". Scroll up, click on "Show Enabled Apps", hover over the "Event Notification" app you just enabled and click on the "Settings" options for it. To save all of your events, you need to set the HTTP Post URL field to the Keen IO URL. Use the URL below, but change the variables KEEN_PROJECT_ID and API_WRITE_KEY with the information you copied earlier from Keen IO:
 
 ```sh
 https://api.keen.io/3.0/projects/KEEN_PROJECT_ID/partners/sendgrid/versions/v3?api_key=API_WRITE_KEY
@@ -365,6 +365,6 @@ Now you should already know what to do next to get this new data in our dashboar
 
 ## Next steps
 
-This is an quick & easy way to get setup with your own custom dashboard for email events. Each company will probably want to have its own custom set of metrics, and you can do a lot more by checking Keen's documentation, the data analysis API and the data visualization API. You can also add more information to your emails events using SendGrid's X-SMTPAPI. For example, you can add a category to all your events regarding purchases, and use that data to make more in-depth analysis inside Keen IO.
+This is a quick & easy way to get setup with your own custom dashboard for email events. Each company will probably want to have its own custom set of metrics, and you can do a lot more by checking Keen's documentation, the data analysis API and the data visualization API. You can also add more information to your emails events using SendGrid's X-SMTPAPI. For example, you can add a category to all your events regarding purchases, and use that data to make more in-depth analysis inside Keen IO.
 
 Now go ahead and put that dashboard in your office 60'' screen for everyone to see! ☺
