@@ -7,7 +7,7 @@ This is a quick tutorial on getting a dashboard setup with SendGrid's Event Webh
 - SendGrid is an email infrastructure that lets you easily send transactional and marketing emails. They have an Event Webhook that lets you receive all events that happen with an email such as Delivered, Clicked, Marked as Spam, etc.
 - Keen IO was built to collect and store huge amounts of data. You can send it data from multiple different sources and then query, visualize and analyze that information.
 
-Storing, analyzing and displaying email event information can be useful on tracking how well your email marketing campaigns are doing, what percentage of users are going through the delivery funnel, from receiving an email all the way to clicking on a link, and making sure that you're keeping a clean email list and have a low number of Spam reports.
+Storing, analyzing and displaying email event information can be useful for tracking how well your email marketing campaigns are doing, what percentage of users are going through the delivery funnel, from receiving an email all the way to clicking on a link, and making sure that you're keeping a clean email list and have a low number of Spam reports.
 
 This tutorial is going to assume you have just created accounts for both services, and should be even easier to follow if you already have that setup. It will cover:
 
